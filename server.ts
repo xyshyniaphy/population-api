@@ -1,4 +1,4 @@
-import { ApolloServer, gql, makeExecutableSchema } from 'apollo-server-micro';
+import { ApolloServer, gql } from 'apollo-server-micro';
 
 import microCors = require('micro-cors');
 
@@ -1022,14 +1022,10 @@ const resolvers = {
     },
   };
 
-const schema = makeExecutableSchema({
-    typeDefs,
-    resolvers
-  })
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-const server = new ApolloServer( schema, playground: true, introspection: true,);
+const server = new ApolloServer(  {typeDefs, resolvers, introspection: true});
 
 
 const cors = microCors()
