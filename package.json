@@ -20,7 +20,8 @@
   },
   "homepage": "https://github.com/xyshyniaphy/population-api#readme",
   "dependencies": {
-    "apollo-server": "^3.4.0",
-    "graphql": "^15.6.1"
+    "apollo-server-micro": "^3.4.0",
+    "graphql": "^15.6.1",
+    "micro-cors": "^0.1.1"
   }
 }

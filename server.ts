@@ -1,4 +1,6 @@
-const { ApolloServer, gql } = require('apollo-server');
+import { ApolloServer, gql } from 'apollo-server-micro';
+
+import microCors = require('micro-cors');
 
 const populations=[
     {
@@ -1023,9 +1025,17 @@ const resolvers = {
 
 // The ApolloServer constructor requires two parameters: your schema
 // definition and your set of resolvers.
-const server = new ApolloServer({ typeDefs, resolvers, introspection: true, playground: true });
+const server = new ApolloServer({ typeDefs, resolvers, introspection: true });
+
+
+const cors = microCors()
+
+const handler = server.createHandler({ path: '/' })
 
 // The `listen` method launches a web server.
-server.listen().then(({ url }) => {
-  console.log(`🚀  Server ready at ${url}`);
-});
+// server.listen().then(({ url }) => {
+//   console.log(`🚀  Server ready at ${url}`);
+// });
+
+
+export default cors((req, res) => req.method === 'OPTIONS' ? res.end() : handler(req, res))
